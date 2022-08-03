@@ -7,7 +7,9 @@
     width: 150px;
     /* text-decoration: none; */
 }
-
+*{
+    scroll-behavior:smooth
+}
 hr {
     display: none;
 }
@@ -28,7 +30,7 @@ header>p {
     /* top: 4px; */
     /* margin-bottom: 200px; */
     margin: 0;
-    line-height: 320px;
+    /* line-height: 320px; */
     text-shadow: 1px 1px 2px #fffbfb;
     color: rgb(241 241 241);
 }
@@ -49,4 +51,7 @@ header>p {
     background-image: url("../img/(pid-69544713)凤仙花.png");
     background-position: 30% 30%;
     height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

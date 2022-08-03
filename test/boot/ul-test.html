@@ -1,0 +1,444 @@
+<html>
+
+<head>
+    <title>
+        wexx
+    </title>
+    <link rel="shortcut icon" href="../../bitbug_favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <script type='' src='./font_3561086_fqt5jglodd8/iconfont.js'></script>
+    <link href='./font_3561086_fqt5jglodd8/iconfont.css' rel="stylesheet" type="text/css">
+</head>
+<style>
+    .icon {
+        width: 1.5em;
+        height: 1.5em;
+        vertical-align: -0.15em;
+        fill: currentColor;
+        overflow: hidden;
+    }
+</style>
+<style>
+    :root {
+        box-sizing: border-box;
+    }
+
+    *,
+    ::after,
+    ::before {
+        box-sizing: inherit;
+    }
+
+    nav {
+        /* margin: 0 auto; */
+        /* text-align: center; */
+        color: white;
+        align-items: center;
+        padding: 1em;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+
+    .nav--item {
+        padding: 0 10px;
+    }
+
+
+
+    .nav--link {
+        /* box-sizing: content-box; */
+        /* padding: 0 10px; */
+        padding-bottom: 0.25em;
+        list-style-type: none;
+        position: relative;
+    }
+
+    .nav--toggle {
+        display: none;
+    }
+
+    .nav--link:after {
+        position: absolute;
+        width: 0;
+        left: 0;
+        bottom: 0;
+        height: 3px;
+        content: '';
+        background-color: aqua;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .nav--link:hover:after {
+        width: 100%;
+    }
+
+    /* img {
+        width: 100px;
+        transition: all 0.5s;
+    } */
+
+    .scale {
+        transform: scale(1.2);
+    }
+
+    .left {
+        margin-right: auto;
+        font-size: 1.5em;
+        font-weight: bold;
+        padding: 0 10px;
+
+    }
+
+    .left a {
+        text-decoration: none;
+        color: white;
+    }
+
+    nav .iconfont {
+        color: white;
+    }
+
+    .side {
+        z-index: 20;
+        position: fixed;
+        right: -200px;
+        height: 100%;
+        top: 0;
+        width: 200px;
+        background-color: white;
+        transition: all 0.5s ease-in-out;
+    }
+
+    .open {
+        transform: translate(-100%, 0);
+    }
+
+    .side--musk {
+        z-index: 10;
+        position: fixed;
+        right: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        /* visibility: hidden; */
+        background-color: black;
+        visibility: hidden;
+        transition: opacity 0.2s linear,
+            visibility 0s linear 0.2s;
+    }
+
+    body {
+        margin: 0;
+        background-image: url(./1.png);
+        background-attachment: fixed;
+    }
+
+    .side--open {
+        opacity: 0.5;
+        visibility: visible;
+        transition-delay: 0s;
+    }
+
+    header {
+        background-image: url(./0.png);
+        background-attachment: fixed;
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    .site--info {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        text-align: center;
+        color: aliceblue;
+        font-size: 2em;
+    }
+    .site--info .iconfont{
+        font-size: 0.75em;
+    }
+    .site--contact {
+        display: none;
+    }
+
+    a{
+        text-decoration: none;
+        
+    }
+
+    .article--link {
+        display: flex;
+        align-items: center;
+        /* height: 11.25em; */
+    }
+
+    .img--container {
+        width: 20em;
+        overflow: hidden;
+    }
+    .article--link:hover span{
+        color: #b0e5ab;
+    }
+    .article--link span {
+        font-size: 1.7em;
+        font-weight: bold;
+        /* padding: 2em; */
+        /* height: 11.25em; */
+        color: #000;
+        margin: 1em;
+        transition: all 0.2s ease-in-out;
+    }
+    .article {
+        background-color: aliceblue;
+        border-radius: 0.5em;
+        /* height: 11.25em; */
+
+        /* width: 40%; */
+    }
+
+    .article--container {
+        width: 50%;
+        padding: 2em;
+        /* padding-left: 5em; */
+    }
+    .img--container{
+        overflow:hidden;
+        border-radius: 0.5em 0 0 0.5em;
+
+    }
+    .img--container img {
+        overflow: hidden;
+        object-fit: cover;
+        border-radius: 0.5em 0 0 0.5em;
+        width: 100%;
+        height: 11.25em;
+        transition: all 0.5s ease-in-out;
+    }
+
+    main {
+        display: flex;
+        /* width: 80%; */
+        justify-content: center;
+        flex-direction: row;
+    }
+
+    .anime {
+        width: 30%;
+        text-align: center;
+        color: black;
+        /* justify-self: flex-end; */
+        /* margin: auto; */
+    }
+    .anime a{
+        color: #000;
+    }
+    .anime--png {
+        width: 100%;
+        /* height: 100%; */
+    }
+
+    @media screen and (max-width: 800px) {
+        nav>.nav--item {
+            display: none;
+        }
+
+        .nav--toggle {
+            display: block;
+        }
+
+        .site--contact {
+            display: block;
+        }
+
+        main {
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .article--container {
+            width: 100%;
+            padding-left: 2em;
+        }
+
+        .anime {
+            width: 80%;
+            margin: 10%;
+            /* text-align: center; */
+        }
+        .img--container img{
+            border-radius: 0.5em 0.5em 0em 0em;
+        }
+        .img--container{
+            border-radius: 0.5em 0.5em 0em 0em;
+            width: 100%;
+        }
+        .article--link{
+            flex-direction: column;
+        }
+        .article--link span{
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    }
+    .side--item{
+        display: flex;
+        /* justify-content: center; */
+        flex-direction: column;
+    }
+    .side--item .nav--item{
+        text-align: center;
+        font-size: 1.5em;
+        margin: 1em;
+    }
+    .side--item .iconfont{
+        font-size: 1em;
+    }
+    .footer{
+    /* position: fixed; */
+    width: 100%;
+    bottom: 0px;
+    background-color: #b0e5ab;
+    margin-top: 60px;
+    text-align: center;
+}
+.footer a{
+    text-decoration: none;
+    color: black;
+}
+</style>
+
+<body>
+    <header>
+        <nav>
+            <div class="left">
+                <a class="nav--link" href="index.html">
+                    wexx
+                </a>
+            </div>
+            <div class="nav--item">
+                <a class="nav--link">
+                    <i class="iconfont icon-nav-01"></i>
+                    分类
+                </a>
+            </div>
+            <div class="nav--item">
+                <a class="nav--link">
+                    <i class="iconfont icon-nav-13"></i>
+                    我的
+                </a>
+            </div>
+            <div class="nav--item">
+                <a class="nav--link">
+                    <i class="iconfont icon-nav-24"></i>
+                    列表
+                </a>
+            </div>
+            <div class="nav--item">
+                <a class="nav--link">
+                    <i class="iconfont icon-nav-03"></i>
+                    设置
+                </a>
+            </div>
+            <div class="nav--toggle" onclick="openSide()">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-nav-01"></use>
+                </svg>
+            </div>
+        </nav>
+        <div class="side">
+            <div class="side--item">
+                <div class="nav--item">
+                    <a class="nav--link">
+                        <i class="iconfont icon-nav-01"></i>
+                        分类
+                    </a>
+                </div>
+                <div class="nav--item">
+                    <a class="nav--link">
+                        <i class="iconfont icon-nav-13"></i>
+                        我的
+                    </a>
+                </div>
+                <div class="nav--item">
+                    <a class="nav--link">
+                        <i class="iconfont icon-nav-24"></i>
+                        列表
+                    </a>
+                </div>
+                <div class="nav--item">
+                    <a class="nav--link">
+                        <i class="iconfont icon-nav-03"></i>
+                        设置
+                    </a>
+                </div>
+                <div class="nav--item">
+                    <a class="nav--link">
+                        <i class="iconfont icon-nav-13"></i>
+                        我的
+                    </a>
+                </div>
+            </div>
+        </div>
+            <div class="side--musk" onclick="openSide()"></div>
+            <div class="site--info">
+                <div class="site--name">wexx</div>
+                <div class="site--contact">
+                    <a class="contact--link">
+                        <i class="iconfont icon-nav-03"></i>
+                    </a>
+                    <a class="contact--link">
+                        <i class="iconfont icon-nav-24"></i>
+                    </a>
+                    <a class="contact--link">
+                        <i class="iconfont icon-nav-13"></i>
+                    </a>
+                    <a class="contact--link">
+                        <i class="iconfont icon-nav-01"></i>
+                    </a>
+                </div>
+            </div>
+    </header>
+    <!-- <div style="width: 100px;overflow: hidden;"><img class="scale" src="../../0.png"></div> -->
+    <main>
+        <div class="article--container">
+            <div class="article">
+                <a class="article--link" href="https://www.wexx.city/%E4%BD%BF%E7%94%A8react%E6%9E%84%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A1%B5/parsed.html">
+                    <div class="img--container">
+                        <img class="" src="https://fs.lolimapis.ml/ACGPic/?size=bmiddle">
+                    </div>
+                    <span>使用react</span>
+                </a>
+            </div>
+        </div>
+        <div class="anime">
+            <img class="anime--png" src="./Anime-Purple-PNG-File (1).png"></img>
+            <br></br>
+            <a id="anime--arr" href="https://www.pngmart.com/image/339749" target="_blank">
+                Anime Purple PNG HD
+            </a>
+        </div>
+    </main>
+    <div class="footer"><a href="https://beian.miit.gov.cn/" id="icp">蜀ICP备2022017690号-1</a></div>
+
+</body>
+<script>
+    function openSide() {
+        document.querySelector('.side').classList.toggle('open');
+        document.querySelector('.side--musk').classList.toggle('side--open');
+    }
+    let arts=document.getElementsByClassName("article--link")
+    // arts[0].classList.add("active")
+    for(let i=0;i<arts.length;i++){
+        arts[i].addEventListener("mouseover",function(){
+            arts[i].getElementsByTagName("img")[0].classList.add("scale")
+        });
+        arts[i].addEventListener("mouseout",function(){
+            arts[i].getElementsByTagName("img")[0].classList.remove("scale")
+        });
+    }
+</script>
+
+</html>
