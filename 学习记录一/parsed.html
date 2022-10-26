@@ -1,0 +1,83 @@
+<html>
+<head>
+    <title>
+    </title>
+</head>
+<body>
+<div class="contente">
+<div class="main">
+<h2 id="杂项">杂项</h2>
+<p>图标使用<code>link</code> 标签</p>
+<pre><code class="language-html">&lt;link rel=&quot;shortcut icon&quot; href=&quot;&quot; /&gt;
+</code></pre>
+<h2 id="css">css</h2>
+<p>使盒子宽高加上margin,更容易计算,在需要的地方也可以很好的切换回来</p>
+<pre><code class="language-css">:root {
+        box-sizing: border-box;
+    }
+
+    *,
+    ::after,
+    ::before {
+        box-sizing: inherit;
+    }
+</code></pre>
+<p>在需要绝对定位的地方,对父元素使用<code>relative</code> 地位,不会对父元素造成影响,子元素也可以使用定位</p>
+<p><code>:after</code> 等伪元素可以实现一些效果而不必添加新的元素</p>
+<p>对<code>hover</code> 后对伪元素和子元素有效果,先对父元素<code>hover</code>,再接子元素等</p>
+<pre><code class="language-css">.nav--link:hover:after {
+        width: 100%;
+    }
+</code></pre>
+<p>对元素添加效果一般通过更改元素的类实现</p>
+<p>渐隐消失动画可以混合使用<code>opacity</code> 和<code>visibility</code> 实现</p>
+<pre><code class="language-css">/* 关闭状态*/
+.side--musk {
+opacity: 0;
+visibility: hidden;
+transition: opacity 0.2s linear,
+            visibility 0s linear 0.2s;
+}
+</code></pre>
+<pre><code class="language-css">/*打开状态*/
+.side--open {
+        opacity: 0.5;
+        visibility: visible;
+        transition-delay: 0s;
+    }
+</code></pre>
+<p><code>css</code> 属性设置多个,后面的会覆盖前面的,是&quot;层叠&quot;的来源</p>
+<p>所有设置多个<code>transition</code>的时候,用逗号分开</p>
+<pre><code class="language-css">background-attachment: fixed;/*实现背景不动效果*/
+</code></pre>
+<pre><code class="language-css">overflow: hidden;/*对父元素设置,可以使子元素不会超过父元素,包括圆角效果*/
+</code></pre>
+<p>移动端适配的杀手,使用<code>flex</code> 对两栏布局或者多栏布局使用<code>flex-direction</code> 轻松改变成一栏布局,该隐藏的隐藏,显示的显示,加上以下代码完事.</p>
+<pre><code class="language-html">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, user-scalable=no&quot;&gt;
+&lt;!--告诉浏览器以做移动端优化,并禁止缩放!--&gt;
+</code></pre>
+<h3 id="-webkit-scrollbar">::-webkit-scrollbar</h3>
+<p>虽然是非标准,但是除了Firefox都支持</p>
+<p><code>::-webkit-scrollbar</code> :设置滚动条轨道,支持背景颜色和宽高还有圆角</p>
+<p><code>::-webkit-scrollbar-button</code> 设置滚动条上下两侧的按钮</p>
+<p><code>::-webkit-scrollbar-thumb</code> 滚动条的条 支持背景颜色和圆角</p>
+<p><code>::-webkit-scrollbar-track</code> 滚动条的轨道,和<code>::-webkit-scrollbar</code> 差不多,但是先设置<code>::-webkit-scrollbar</code> 其他属性才能生效</p>
+<p><code>::-webkit-scrollbar-track-piece</code> 滚动条没有被条覆盖的部分</p>
+<p><code>::-webkit-scrollbar-corner</code> 水平和垂直滚动条交汇的地方</p>
+<p><code>::-webkit-resizer</code> 调整尺寸的</p>
+<h2 id="js">js</h2>
+<p><code>document.getElementsByClassName</code> 得到的<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLCollection">HTMLCollection</a> 是类数组,不具有<code>map</code> 和<code>forEach</code> 方法,使用<code>Array.form</code> 创建数组.</p>
+</div><div class="right"><div class="imgArr">
+<img id="rightAnime" src=''></img>
+<br></br>
+<a id="arr" href='' target="_blank">
+''
+</a></div>
+</div></div>
+<div class="footer"><a href="https://beian.miit.gov.cn/" id="icp">蜀ICP备2022017690号-1</a></div>
+</body>
+<script  src='../js/article.js'></script>
+<link rel="stylesheet" type="text/css" href="../css/article.css">
+    <link rel="stylesheet" type="text/css" href="../css/prism.css">
+    <script  src='../js/prism.js'></script>
+</html>

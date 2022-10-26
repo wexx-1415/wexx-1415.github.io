@@ -1,0 +1,176 @@
+<html>
+
+<head>
+    <link rel="shortcut icon" href="C:\Users\l\Pictures\Saved Pictures\favicon.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <title>
+        时间</title>
+    <link rel="stylesheet" type="text/css" href="mytimestyle.css">
+</head>
+
+<body>
+        <script>
+            var nt = new Date();
+            var yy = nt.getFullYear();
+            var mn = nt.getMonth();
+            var mm = mn + 1;
+            var dd = nt.getDate();
+            var hh = nt.getHours();
+            var mt = nt.getMinutes();
+            if (dd < 10) { dd = "0" + dd.toString() };
+            if (mm < 10) { mm = "0" + mm.toString() };
+            if (mt < 10) { mt = "0" + mt.toString() };
+            if (hh < 10) { hh = "0" + hh.toString() };
+            var minn = yy.toString() + "-" + mm + "-" + dd + "T" + hh + ":" + mt;
+        </script>
+            <nav>
+                <span onclick="change1()" id="mw">秒表</span>
+                <span onclick="change2()" id="mn">闹钟</span>
+                <span onclick="change3()" id="md">倒计时</span>
+            </nav><br>
+            <section id="miao" style="display:normal">
+
+                <form id="s1">
+                    <p id="time">00:00:00</p>
+
+                    <input type="button" id="clock" size="35" onclick="clsta()" value="开始" style="cursor:pointer" />
+                    <input type="button" id="clockj" size="35" onclick="jici()" value="计次" style="cursor:pointer" />
+                    <input type="button" id="clockj" size="35" onclick="qing()" value="清除" style="cursor:pointer" />
+                    <input type="button" id="clockc" size="35" onclick="clearr()" value="清空" style="cursor:pointer" />
+                </form>
+            </section><span id="cii"></span>
+            <section id="nao" style="display:none">
+                <form id="s2"><input type="datetime-local" min="2021-04-24T23:33" id="datee">
+                    <input type="button" id="cloc" size="35" onclick="nao()" style="cursor:pointer" value="设定闹钟" />
+                </form>
+            </section>
+            <section id="dao" style="display:none">
+                <form id="s3">
+                    <p style="text-align:center;font-size:12px">第一个设置小时与分钟<br>第二个设置秒</p>
+                    <input type="time" id="usr-time" value="00:00">
+                    <input type="number" min="0" max="60" id="usr-sec" value="0">
+                    <input type="button" onclick="reminder()" value="倒计时开始" id="sebu" style="cursor:pointer">
+                </form>
+            </section>
+
+            <script>
+                function reminder() {
+                    var hm = document.getElementById("usr-time").value;
+                    var hour = Number(hm.slice(0, 2));
+                    var minutes = Number(hm.slice(3, 5));
+                    var sec = Number(document.getElementById("usr-sec").value);
+                    var secs = (hour * 3600 + minutes * 60 + sec) * 1000;
+                    function ree() { alert("倒计时到啦") }
+                    var ree = setTimeout(ree, secs);
+                }
+                //倒计时
+                function nao() {
+                    var nt = new Date();
+                    var yy = nt.getFullYear();
+                    var mn = nt.getMonth();
+                    var mm = mn + 1;
+                    var dd = nt.getDate();
+                    var hh = nt.getHours();
+                    var mt = nt.getMinutes();
+                    if (dd < 10) { dd = "0" + dd.toString() };
+                    if (mm < 10) { mm = "0" + mm.toString() };
+                    if (mt < 10) { mt = "0" + mt.toString() };
+                    if (hh < 10) { hh = "0" + hh.toString() };
+                    var sss = nt.getSeconds();
+                    var timee = document.getElementById("datee");//闹钟
+                    var alarm = document.getElementById("datee").value;
+                    var alarm1 = Date.UTC(yy, mn, dd, hh, mt);
+                    var yyy = Number(alarm.slice(0, 4));
+                    var mmm = Number(alarm.slice(5, 7)) - 1;
+                    var ddd = Number(alarm.slice(8, 10));
+                    var hhh = Number(alarm.slice(11, 13));
+                    var mtt = Number(alarm.slice(14, 16));
+                    var alarm2 = Date.UTC(yyy, mmm, ddd, hhh, mtt);
+                    var second = Number(alarm2 - alarm1) - sss * 1000;
+                    function all() { alert("你" + yyy + "." + mmm + "." + ddd + "." + hhh + "." + mtt + "的闹钟到啦") }
+                    var alemm = setTimeout(all, second);
+                    alert("设定成功!");
+                }
+                var a = 0;//秒表
+                function clsta() {
+                    time(); sta = setInterval(time, 10); var bb = document.getElementById("clock");
+                    var bbv = bb.value;
+                    var bbb = bb.setAttribute("onclick", "pause()");
+                    if (bbv == "开始") { bbv1 = bb.setAttribute("value", "暂停") }
+                    else if (bbv == "暂停") { bbv2 = bb.setAttribute("value", "继续") }
+                    else { bbv3 = bb.setAttribute("value", "暂停") }
+                }
+                function time() {
+                    a += 1;
+                    var ssss = a % 100;
+                    var vv = Math.floor(a / 6000);
+                    var sss = Math.floor((a % 6000) / 100);
+                    if (sss < 10) { sss = "0" + sss.toString() }
+                    if (vv == 0) { vv = "00" }
+                    else if (vv < 10) { vv = "0" + vv.toString() };
+                    if (ssss < 10) { ssss = "0" + ssss.toString() }
+                    document.getElementById("time").innerHTML = vv + ":" + sss + ":" + ssss
+                };
+                function pause() {
+                    clearInterval(sta); var bb = document.getElementById("clock");
+                    var bbv = bb.value;
+                    var bbb = bb.setAttribute("onclick", "clsta()");
+                    if (bbv == "开始") { bbv1 = bb.setAttribute("value", "暂停") }
+                    else if (bbv == "暂停") { bbv2 = bb.setAttribute("value", "继续") }
+                    else { bbv3 = bb.setAttribute("value", "暂停") }
+                }
+                function jici() {
+                    if (a != 0) {
+                        var ci = document.getElementById("time").innerHTML;
+                        var ciii = document.getElementById("cii");
+                        var p1 = document.createElement("p");
+                        p1.innerHTML = ci + "<br>";
+                        p1.className = "jici";
+                        var pp = ciii.appendChild(p1)
+                    }
+                }
+                function qing() { document.getElementById("cii").innerHTML = " "; }
+                function clearr() {
+                    qing();
+                    clearInterval(sta);
+                    a = 0; document.getElementById("time").innerHTML = "00:00:00"; var bb = document.getElementById("clock");
+                    var bbb = bb.setAttribute("onclick", "clsta()");
+                    var bbb = bb.setAttribute("value", "开始")
+                };//秒表
+                var mwt = document.getElementById("miao");
+                var mnt = document.getElementById("nao");
+                var mdt = document.getElementById("dao");
+                var mwb = document.getElementById("mw");
+                var mnb = document.getElementById("mn");
+                var mdb = document.getElementById("md");
+                function change1() {
+                    mwt.setAttribute("style", "display:normal;");
+                    mnt.setAttribute("style", "display:none;");
+                    mdt.setAttribute("style", "display:none;");
+                    mwb.setAttribute("style", ";border-bottom:solid 3px #1AC5D6");
+                    mnb.setAttribute("style", ";border-bottom:none");
+                    mdb.setAttribute("style", ";border-bottom:none");
+                }
+                function change2() {
+                    mwt.setAttribute("style", "display:none;");
+                    mnt.setAttribute("style", "display:normal;");
+                    mdt.setAttribute("style", "display:none;");
+                    mnb.setAttribute("style", ";border-bottom:solid 3px #1AC5D6");
+                    mwb.setAttribute("style", ";border-bottom:none");
+                    mdb.setAttribute("style", ";border-bottom:none");
+                    var aaa = datee.setAttribute("min", minn);
+                }
+                function change3() {
+                    mwt.setAttribute("style", "display:none;");
+                    mnt.setAttribute("style", "display:none;");
+                    mdt.setAttribute("style", "display:normal;");
+                    mdb.setAttribute("style", ";border-bottom:solid 3px #1AC5D6");
+                    mnb.setAttribute("style", ";border-bottom:none");
+                    mwb.setAttribute("style", ";border-bottom:none");
+                }
+//转换
+            </script>
+
+</body>
+
+</html>

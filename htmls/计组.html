@@ -1,0 +1,309 @@
+ <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'
+                'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd' >
+                    <html xmlns='http://www.w3.org/1999/xhtml'>
+
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <title>计组</title>
+            <link href="../css/app.css" rel="stylesheet" type="text/css" />
+			<link rel="stylesheet" href="../css/prism.css">
+        </head>
+
+        <body>
+            <header id="header">
+                <p>wexx's blog</p>
+            </header>
+            <div id="left" style="background-color: aquamarine;">
+            </div>
+            <article id="pp" style="margin-left: 200px;width:70%;background-color: aqua;"><hr/>
+
+<hr/>
+
+<h2>第二章</h2>
+
+<p>负数补码等于反码+1 正数补码等于原码,补码第一位为符号位,1为负0为正</p>
+
+<p><img alt="image.png" src="assets/image-20220617220125-1dv2biu.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220617220156-ryd93gs.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220617220241-8qbmykh.png"/></p>
+
+<p>符号s 阶码e 尾数f</p>
+
+<p><img alt="image.png" src="assets/image-20220617220555-yuqkrvh.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220617221039-ztxw2ba.png"/></p>
+
+<p>奇校验位 奇数个1取0</p>
+
+<p>对于最多只有一位错的情况，其结果可能是无错或n位数据中某一位出错或k位校验码中某一位出错。因此，共有1+n+k</p>
+
+<p><img alt="image.png" src="assets/image-20220618103311-qbhud1j.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220618103321-bjtxpdy.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220618103843-ipba3ct.png"/>不考虑借位,部分余数首位为1上商1</p>
+
+<p>多项式位数-1位校验位,将原始数据左移校验位,将校验位拼接上去</p>
+
+<hr/>
+
+<p><img alt="image.png" src="assets/image-20220618105348-9rseas3.png"/></p>
+
+<h2>第三章</h2>
+
+<h3>原码一位乘法</h3>
+
+<p><img alt="image.png" src="assets/image-20220618160818-j04cznz.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220618161622-2hdcjym.png"/></p>
+
+<p>C进位,P部分积,Y乘数</p>
+
+<p>Y~i~ =1部分积加乘数,=0加0,加完C,P,Y右移一位,i从最后一位开始</p>
+
+<h3>补码一位乘法</h3>
+
+<p><img alt="image.png" src="assets/image-20220618164147-2aa5khe.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220618164203-i9lejpa.png"/></p>
+
+<p>根据Y~i~ Y~i-1~ 的值决定下一步的操作.每个操作结束后右移,得到结果的补码</p>
+
+<h3>恢复余数除法</h3>
+
+<p>先计算商的符号</p>
+
+<p><img alt="image.png" src="assets/image-20220618174204-ci7l6my.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220618174222-e1smj98.png"/></p>
+
+<p>不管R最高位溢出,最高位为符号位.X每次-Y,放R中,&lt;0恢复余数,商为0,&gt;0为1,左移一位.</p>
+
+<p>结果R是余数,商是结果原码</p>
+
+<h3>不恢复余数法</h3>
+
+<p><img alt="image.png" src="assets/image-20220618182122-l4st1co.png"/></p>
+
+<p>如果商&lt;0,下一次就加</p>
+
+<h3>浮点数运算</h3>
+
+<ul><li><p>对阶</p><p>阶小的那个数的尾数右移，右移的位数等于两个阶码差的绝对值,移码就是阶码<img alt="image.png" src="assets/image-20220618183538-czwdqy6.png"/></p><p>ΔE&gt;0,Y右移Δ位.</p></li><li>尾数规格化,将尾数加减后的结果化为1.b...的形式,右移阶码+1,规格化之前判断溢出</li><li>尾数舍入,浮点数运算中间结果额外保留2位附加位,采用就近舍入,中间结果强制为偶数</li></ul>
+
+<p><img alt="image.png" src="assets/image-20220618200836-5zaxn4q.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220618200859-i4ij0wk.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220618200910-tfam2ae.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220618200920-mw8oro4.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220618201003-yrzkwuk.png"/></p>
+
+<h2>第四章</h2>
+
+<h3>寻址</h3>
+
+<ol><li>立即寻址 指令中给出操作数</li><li>直接寻址 指令中的地址码是操作数的有效地址</li><li>间接寻址 地址码是存放操作数的地址</li><li>寄存器寻址 地址码是操作数所在寄存器</li><li>寄存器间接寻址 地址码存放操作数地址的寄存器</li><li>变址寻址 有效地址为基准地址加上变址寄存器的内容</li></ol>
+
+<h3>扩展编码</h3>
+
+<p><img alt="image.png" src="assets/image-20220618204232-vsguere.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220618204241-0n0qvyx.png"/></p>
+
+<h3>指令</h3>
+
+<p><img alt="image.png" src="assets/image-20220618205452-yxzk1n5.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220618205506-daw2l3t.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220618205614-5893k53.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220618205627-30jtmxo.png"/></p>
+
+<p> 两个数组元素地址之间差4</p>
+
+<p><img alt="image.png" src="assets/image-20220619102036-m508zob.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619102046-8oeek8i.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619102202-7jyerk0.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619102210-xi9hwzb.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619102415-yj6v86t.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619102426-ctsnnly.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619102434-w0u8o0c.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619102543-fawbdx5.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619102736-5iva6mh.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619103817-a9phwqu.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619103935-9pz8971.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619103944-xd0tlaa.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619103954-itu0693.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619104006-5atfe2r.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619104308-ewrugi1.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619104315-k5f0ua3.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619105628-q81qcgj.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619105635-jq5tog3.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619105658-kcwbq72.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619105705-3boqqjr.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619105714-6542uoa.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619105721-iy9ngld.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619105728-6zitjxf.png"/></p>
+
+<h2>第五章</h2>
+
+<h3>总线</h3>
+
+<p><img alt="image.png" src="assets/image-20220619133546-gh30837.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619133634-3vt5ha4.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619133646-z5xsd3r.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619133816-4iho9gm.png"/>寄存器读入数据，并进行ALU操作</p>
+
+<p><img alt="image.png" src="assets/image-20220619133942-om5cxl4.png"/>从内存读入数据</p>
+
+<p><img alt="image.png" src="assets/image-20220619134140-mlhyq4d.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619134206-pk8udxs.png"/></p>
+
+<h3>单周期</h3>
+
+<h4>控制信号</h4>
+
+<p><img alt="image.png" src="assets/image-20220619134351-7z0iz5c.png"/></p>
+
+<p>ALUctr 3位</p>
+
+<ul><li>SUBctr=1,做减法</li><li>OPctr,加减/位运算/小于置一,两位</li><li>OVctr=1,需要判断溢出</li><li>SIGctr=1,带符号整数比较小于置一</li></ul>
+
+<p><img alt="image.png" src="assets/image-20220619135805-pdrtgxg.png"/></p>
+
+<p>RegWr=1,写使能</p>
+
+<p><img alt="image.png" src="assets/image-20220619140115-t34ubt6.png"/></p>
+
+<p>ExtOp: 零扩展还是符号扩展</p>
+
+<p>ALUSrc: busB还是扩展器</p>
+
+<p>RegDst: 控制目的寄存器是Rd还是Rt</p>
+
+<p><img alt="image.png" src="assets/image-20220619140455-k8aiups.png"/></p>
+
+<p>MemtoReg: ALU结果还是读数放入目的寄存器</p>
+
+<p>MemWr: 写使能</p>
+
+<p><img alt="image.png" src="assets/image-20220619140737-69mm7e5.png"/></p>
+
+<p>Branch: 是否是分支指令</p>
+
+<p><img alt="image.png" src="assets/image-20220619163433-33mxjw4.png"/></p>
+
+<p>Jump控制下一条指令是PC还是跳转</p>
+
+<p>R型指令</p>
+
+<h4>数据通路</h4>
+
+<ul><li><p>R型</p><p><img alt="image.png" src="assets/image-20220619163844-e5ccrbi.png"/></p><p><img alt="image.png" src="assets/image-20220619163904-yg9v26p.png"/></p><p><img alt="image.png" src="assets/image-20220619163952-lilouly.png"/></p></li><li><p>I型指令</p><p><img alt="image.png" src="assets/image-20220619164036-d9canot.png"/></p><p><img alt="image.png" src="assets/image-20220619164100-epveqdg.png"/></p></li><li><p>Load</p><p><img alt="image.png" src="assets/image-20220619164630-kbh99c0.png"/></p><p><img alt="image.png" src="assets/image-20220619164747-envpp1c.png"/></p></li><li><p>Store</p><p><img alt="image.png" src="assets/image-20220619164811-riirwdi.png"/></p><p><img alt="image.png" src="assets/image-20220619164955-8dteh6s.png"/></p></li><li><p>分支/跳转</p><p><img alt="image.png" src="assets/image-20220619165121-fo8vm3d.png"/></p></li></ul>
+
+<h3>多周期</h3>
+
+<p><img alt="image.png" src="assets/image-20220619170140-5cnsr0a.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619171726-a00c6jh.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619171900-8uvr35c.png"/></p>
+
+<h3>微命令</h3>
+
+<p>编码方式： 直接控制法  字段直接编码法  字段间接编码法 最少编码法</p>
+
+<p>地址确定： 计数器法 断定法</p>
+
+<h2>第六章</h2>
+
+<h3>流水线设计</h3>
+
+<p><img alt="image.png" src="assets/image-20220619195527-mnqsohe.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619195605-w6yducx.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619195826-b1u9yep.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619200025-kovx4al.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619200103-6kcpwvi.png"/></p>
+
+<h3>冒险</h3>
+
+<p><img alt="image.png" src="assets/image-20220619201100-tn5x0sp.png"/></p>
+
+<p>指令存储器IM和DM分开解决结构冒险</p>
+
+<p><img alt="image.png" src="assets/image-20220619201237-18bhhun.png"/></p>
+
+<p>通过插入nop或者硬件阻塞或者转发可以消除数据冒险</p>
+
+<p><img alt="image.png" src="assets/image-20220619201538-mfhyukh.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619201716-avp8e5h.png"/></p>
+
+<h2>第七章</h2>
+
+<p><img alt="image.png" src="assets/image-20220619204255-c94nd76.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619204507-zlmis8q.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619205148-3lkok64.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619205227-l1uo9hl.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619210414-xw9tmjc.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619210605-n7cjxhi.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619210643-q9whcc1.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619210722-87lvalv.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619212959-1jpuuin.png"/></p>
+
+<p>全写法 回写法</p>
+
+<p><img alt="image.png" src="assets/image-20220619213657-m5mptus.png"/></p>
+
+<p><img alt="image.png" src="assets/image-20220619213817-kvtjwp4.png"/></p>
+
+<p>RAM 随机存储器 ROM 只读存储器</p>
+
+<p><img alt="image.png" src="assets/image-20220619223822-xfl6n35.png"/></p>
+
+<p>1B=8位</p></div><script src="../js/app.js"></script>
+	<script src="../js/prism.js"></script></body></html>

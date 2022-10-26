@@ -1,0 +1,134 @@
+<html>
+<head>
+    <title>
+    </title>
+</head>
+<body>
+<div class="contente">
+<div class="main">
+<h2 id="react简介">react简介</h2>
+<p>react的目标是实现组件化,推崇在一个文件里同时写页面结构和逻辑.</p>
+<h3 id="基本语法">基本语法:</h3>
+<pre><code class="language-js">class Header extends Component {
+  render () {
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;title{1+1}&lt;/h1&gt;
+      &lt;/div&gt;
+    )
+  }
+}
+
+ReactDOM.render(
+  &lt;Header /&gt;,
+  document.getElementById(&#39;root&#39;)
+)
+</code></pre>
+<p>使用react提供的<code>jsx</code> 语法,从<code>Compoent</code> 继承的类,只需实现<code>render</code>方法即可作为<code>jsx</code> 里面的一个HTML标签使用,使用<code>RactDOM.render</code> 方法,将组件渲染到指定的HTML结点,<strong>并删除已有的结点</strong></p>
+<p>可以在<code>jsx</code> 里面使用<code>{}</code> ,里面可以是<code>jsx</code> 代码,也可以将<code>jsx</code> 代码作为变量,借此实现一些逻辑.return返回的组件必须由一个标签包裹起来.赋值操作必须在return语句之前完成。</p>
+<h3 id="使用事件监听">使用事件监听</h3>
+<p>直接在原生标签上使用<code>on*</code> 事件名称大写,例如<code>onClick</code> ,处理函数在组件中实现,传递的时候绑定<code>this</code> ,事件处理函数使用<code>handle</code> 开头命名</p>
+<pre><code class="language-js">class Title extends Component {
+  handleClickOnTitle (e) {
+    console.log(this)
+  }
+
+  render () {
+    return (
+    //处理函数才能得到正确的this
+      &lt;h1 onClick={this.handleClickOnTitle.bind(this)}&gt;React 小书&lt;/h1&gt;
+    )
+  }
+}
+</code></pre>
+<h2 id="state和props">state和props</h2>
+<p><code>state</code>用于处理组件状态的改变,比如显示还是不显示等等,而<code>props</code>类似于组件的属性.状态是可以通过父组件与其他组件进行通信的,在不需要通信的时候使用<code>props</code>.</p>
+<p><code>state</code>一般在组件的构造函数中设置初始状态,使用<code>setState</code>函数改变状态,只需传入需要改变的状态即可</p>
+<pre><code class="language-js">class LikeButton extends Component {
+  constructor () {
+    super()//继承的时候先调用super(),this的值才会正确
+    this.state = { isLiked: false }
+  }
+
+  handleClickOnLikeButton () {
+    this.setState({
+      isLiked: !this.state.isLiked
+    })
+  }
+
+  render () {
+    return (//点击事件触发事件处理函数,又调用setState函数改变状态.
+      &lt;button onClick={this.handleClickOnLikeButton.bind(this)}&gt;
+        {this.state.isLiked ? &#39;取消&#39; : &#39;点赞&#39;} 👍
+      &lt;/button&gt;
+    )
+  }
+}
+</code></pre>
+<p>如果需要使用上一次<code>state</code> 的值,在<code>setState</code> 中的函数会传入<code>preState</code> 即前一次的状态.</p>
+<p><code>props</code> 是通过标签上的属性设置的.除了<strong>重新渲染</strong>外无法更改值</p>
+<pre><code class="language-js">&lt;LikeButton attr=&quot;test&quot;/&gt;
+</code></pre>
+<p>通过<code>this.props.attr</code> 调用</p>
+<p>通过设置<code>defaultProps</code> 设置默认值,一般在构造函数之前</p>
+<pre><code class="language-js"> static defaultProps = {
+    likedText: &#39;取消&#39;,
+    unlikedText: &#39;点赞&#39;
+  }
+</code></pre>
+<blockquote>
+<p><code>state</code> <strong>是让组件控制自己的状态</strong>，<code>props</code> <strong>是让外部对组件自己进行配置 。</strong></p>
+</blockquote>
+<h2 id="列表渲染">列表渲染</h2>
+<p>要对类似元素批量渲染,可以先这样.同时必须有<strong>唯一key</strong>.</p>
+<pre><code class="language-js">class Index extends Component {
+  render () {
+    return (
+      &lt;div&gt;
+        {users.map((user,i) =&gt; {
+          return (
+            &lt;div key={i}&gt;
+              &lt;div&gt;姓名：{user.username}&lt;/div&gt;
+              &lt;div&gt;年龄：{user.age}&lt;/div&gt;
+              &lt;div&gt;性别：{user.gender}&lt;/div&gt;
+              &lt;hr /&gt;
+            &lt;/div&gt;
+          )
+        })}
+      &lt;/div&gt;
+    )
+  }
+}
+</code></pre>
+<h2 id="构想">构想</h2>
+<ul>
+<li>画面要好看</li>
+<li>动画要丝滑</li>
+<li>功能要丰富</li>
+</ul>
+<ol>
+<li>入门react</li>
+<li>《深入理解css》</li>
+<li>重构页面</li>
+<li>入门nodejs</li>
+<li>模仿别人优秀的页面</li>
+<li>不摆烂</li>
+</ol>
+<p><del>别鸽了</del></p>
+<p><a href="https://hyf.js.org/react-naive-book">react.js 小书</a></p>
+<p><img src="https://fs.lolimapis.ml/ACGPic/" alt="可爱捏"></p>
+<p><img src="assets/pid-36633503%E9%80%A2%E3%81%84%E3%81%9F%E3%81%84%E3%81%A8%E9%A1%98%E3%81%86-20220714205448-bnby1ox.jpg" alt="pid-36633503逢いたいと願う.jpg"></p>
+</div><div class="right"><div class="imgArr">
+<img id="rightAnime" src=''></img>
+<br></br>
+<a id="arr" href='' target="_blank">
+''
+</a></div>
+</div></div>
+<div class="footer"><a href="https://beian.miit.gov.cn/" id="icp">蜀ICP备2022017690号-1</a></div>
+</body>
+<script  src='../js/article.js'></script>
+<link rel="stylesheet" type="text/css" href="../css/article.css">
+    <link rel="stylesheet" type="text/css" href="../css/prism.css">
+    <script  src='../js/prism.js'></script>
+</html>

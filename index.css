@@ -1,0 +1,77 @@
+body{
+    background-color: aliceblue;
+}
+@font-face {
+    font-family: "zkqt";
+    src: url(./FZQINGKBYSJF.TTF);
+}
+*{
+    font-family: "zkqt";
+}
+.main{
+    width: 50%;
+    /* border: 5px black solid; */
+    margin-right: 20px;
+    /* margin-left: 100px; */
+}
+.right{
+    width: 40%;
+    /* border: 5px black solid; */
+    text-align: center;
+}
+@media screen and (max-width: 800px) {
+    .max{
+        flex-direction: column;
+    }
+    .right{
+        width: 100%;
+    }
+    .main{
+        width: 100%;
+    }
+}
+
+
+article{
+    font-size: 40px;
+    margin: 20px;
+    margin-top: 40px;
+    text-align: center;
+}
+#icp{
+    /* position: fixed; */
+    /* margin: 10 auto; */
+    font-size: 20px;
+    bottom: 10px;
+}
+.footer{
+    position: fixed;
+    width: 100%;
+    bottom: 10px;
+    margin-top: 60px;
+    text-align: center;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+a:hover{
+    color: #1AC5D6;
+    border-bottom:solid 3px #1AC5D6
+}
+#arr{
+    text-decoration: none;
+}
+
+.max{
+    display: flex;
+    margin: 20px;
+    justify-content: center;
+    margin-top: 50px;
+    /* width: 100%; */
+}
+#rightAnime{
+    /* width: 100%; */
+    max-width: 100%;
+    max-height: 700px;
+}
