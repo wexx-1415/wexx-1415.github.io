@@ -1,0 +1,213 @@
+<html>
+	<head>
+		<title> </title>
+		<script type="" src=""></script>
+		<style>
+			body {
+				margin: 0;
+				padding: 0;
+			}
+			#videos {
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+			}
+			.item {
+				flex: 1;
+				width: 50%;
+			}
+			.hide {
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="bar">
+			<input
+				type="file"
+				id="file"
+				accept="video/*,video/x-matroska,image/*"
+				onchange="changeVideo()"
+			/>
+
+			<input
+				type="range"
+				onchange="quaChange(this.value)"
+				value="1"
+				min="1"
+				name="qua"
+				max="20"
+			/>
+			<label for="qua">精度控制</label>
+			<input
+				type="number"
+				onchange="grayChange(this.value)"
+				value="100"
+				min="0"
+				max="255"
+			/>
+			<label>灰度容差</label>
+
+			<input
+				type="checkbox"
+				name="fill"
+				id="fill"
+				onchange="fillChange(this.checked)"
+				checked
+			/>
+			<label for="fill">非点阵部分填充平均色</label>
+
+			<input
+				type="checkbox"
+				id="color"
+				onchange="isGrayChange(this.checked)"
+				checked
+			/>
+			<label for="color">黑白</label>
+
+			<input
+				id="reverse"
+				type="checkbox"
+				onchange="isReverseChange(this.checked)"
+			/>
+			<label for="reverse">黑白反转</label>
+
+			<input id="pic" type="checkbox" onchange="isPicChange(this.checked)" />
+			<label for="pic">图片</label>
+		</div>
+		<div id="videos">
+			<video class="item" src="" controls muted></video>
+			<img class="item hide" src="" alt="img" />
+			<canvas class="item" id="can"></canvas>
+		</div>
+	</body>
+	<script>
+		let changeVideo = () => {
+			let file = document.getElementById('file').files[0];
+			let video = document.querySelector('video');
+			let img = document.querySelector('img');
+			let url = URL.createObjectURL(file);
+			video.src = url;
+			img.src = url;
+		};
+		let isGray = true;
+		let quality = 1;
+		let isReverse = false;
+		let Gray = 100;
+		let isPic = false;
+		let isPicChange = (checked) => {
+			isPic = checked;
+
+			document.querySelector('img').classList.toggle('hide');
+			document.querySelector('video').classList.toggle('hide');
+		};
+		let isReverseChange = (checked) => {
+			isReverse = checked;
+		};
+		let quaChange = (e) => {
+			quality = e;
+		};
+		let isGrayChange = (e) => {
+			isGray = e;
+		};
+		let fill = true;
+		let fillChange = (e) => {
+			fill = e;
+		};
+		let grayChange = (e) => {
+			Gray = e;
+		};
+		let video = document.querySelector('video');
+		let img = document.querySelector('img');
+		let can = document.getElementById('can');
+		let ctx = can.getContext('2d');
+		let allChunks = [];
+		let getData = (data) => {
+			let index = 0;
+			let gray = parseInt(
+				data[index] * 0.3 + data[index + 1] * 0.59 + data[index + 2] * 0.11
+			);
+			if (gray > Gray) {
+				gray = 0 + isReverse * 255;
+			} else {
+				gray = 255 - isReverse * 255;
+			}
+			let r = data[index];
+			let g = data[index + 1];
+			let b = data[index + 2];
+			let a = data[index + 3];
+			if (isGray) return [gray, gray, gray, 255];
+			else return [r, g, b, a];
+		};
+		let convent = () => {
+			let width = (can.width = video.videoWidth || img.width);
+			let height = (can.height = video.videoHeight || img.height);
+			setInterval(() => {
+				ctx.drawImage(isPic ? img : video, 0, 0, width, height);
+				let imgData = ctx.getImageData(0, 0, width, height);
+				let data = imgData.data;
+				let toPut = ctx.createImageData(width, height);
+				let toPutData = toPut.data;
+				for (let i = 0; i < width; i += 1) {
+					for (let j = 0; j < height; j += 1) {
+						if (i % quality == 0 && j % quality == 0) {
+							let index = (i + j * width) * 4;
+							let convented = getData([
+								data[index],
+								data[index + 1],
+								data[index + 2],
+								data[index + 3],
+							]);
+							toPutData[index] = convented[0];
+							toPutData[index + 1] = convented[1];
+							toPutData[index + 2] = convented[2];
+							toPutData[index + 3] = convented[3];
+						} else if (fill) {
+							let index = (i + j * width) * 4;
+							let r = data[index];
+							let g = data[index + 1];
+							let b = data[index + 2];
+							let a = data[index + 3];
+							let avg = (r + g + b) / 3;
+							toPutData[index] = r;
+							toPutData[index + 1] = g;
+							toPutData[index + 2] = b;
+							toPutData[index + 3] = a / 2;
+						}
+					}
+				}
+				ctx.putImageData(toPut, 0, 0);
+			}, 1000 / 30);
+			let stream = can.captureStream(60); // 60 FPS recording
+			let recorder = new MediaRecorder(stream, {
+				mimeType: 'video/webm;codecs=vp9',
+			});
+			// canvas 录制回调
+			recorder.ondataavailable = (e) => {
+				allChunks.push(e.data);
+			};
+			recorder.start(10);
+		};
+		video.addEventListener('play', () => {
+			convent();
+		});
+		img.onload = () => {
+			convent();
+		};
+		video.addEventListener('ended', () => {
+			let blob = new Blob(allChunks);
+			downloadByBlob(blob);
+		});
+		function downloadByBlob(blobObj) {
+			const link = document.createElement('a');
+			console.log(blobObj);
+			link.style.display = 'none';
+			const downloadUrl = window.URL.createObjectURL(blobObj);
+			link.href = downloadUrl;
+			link.download = `test.webm`;
+			document.body.appendChild(link);
+			link.click();
+			link.remove();
+		}
+	</script>
+</html>
